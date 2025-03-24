@@ -8,6 +8,7 @@ from azure.ai.evaluation import (
 
 import azure.identity
 from dotenv import load_dotenv
+
 # Setup the OpenAI client to use either Azure or GitHub Models
 load_dotenv(override=True)
 API_HOST = os.getenv("API_HOST", "github")
@@ -28,7 +29,7 @@ elif API_HOST == "github":
         "base_url": "https://models.inference.ai.azure.com",
         "model": os.getenv("GITHUB_MODEL", "gpt-4o"),
     }
-    
+
 path = "performance-quality-data.jsonl"
 
 
@@ -38,16 +39,13 @@ relevance_eval = RelevanceEvaluator(model_config)
 
 result = evaluate(
     data="quality-eval-testdata.jsonl",
-    evaluators={
-        "relevance": relevance_eval,
-        "groundedness": groundedness_eval
-    },
+    evaluators={"relevance": relevance_eval, "groundedness": groundedness_eval},
     # column mapping
     evaluator_config={
         "default": {
             "query": "${data.query}",
             "response": "${data.response}",
-            "context": "${data.context}"
+            "context": "${data.context}",
         }
     },
     output_path="quality-eval-results.jsonl",

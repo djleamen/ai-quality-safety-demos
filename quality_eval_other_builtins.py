@@ -7,9 +7,9 @@ from azure.ai.evaluation import (
     RougeType,
     F1ScoreEvaluator,
     MeteorScoreEvaluator,
+    BleuScoreEvaluator,
     GleuScoreEvaluator,
 )
-
 import azure.identity
 from dotenv import load_dotenv
 import rich
@@ -41,41 +41,21 @@ ground_truth = 'The dining chair is brown and wooden with four legs and a backre
 response = 'Introducing our timeless wooden dining chair, designed for both comfort and durability. Crafted with a solid wood seat and sturdy four-legged base, this chair offers reliable support for up to 250 lbs. The smooth brown finish adds a touch of rustic elegance, while the ergonomically shaped backrest ensures a comfortable dining experience. Measuring 18" wide, 20" deep, and 35" tall, it\'s the perfect blend of form and function, making it a versatile addition to any dining space. Elevate your home with this beautifully simple yet sophisticated seating option.'
 
 f1_eval = F1ScoreEvaluator()
-
-f1_score = f1_eval(
-    response=response,
-    ground_truth=ground_truth
-)
-
+f1_score = f1_eval(response=response, ground_truth=ground_truth)
 rich.print(f1_score)
 
 rouge_eval = RougeScoreEvaluator(rouge_type=RougeType.ROUGE_1)
-
 rouge_score = rouge_eval(
     response=response,
     ground_truth=ground_truth,
 )
-
 rich.print(rouge_score)
 
-from azure.ai.evaluation import BleuScoreEvaluator
-
 bleu_eval = BleuScoreEvaluator()
-
-bleu_score = bleu_eval(
-    response=response,
-    ground_truth=ground_truth
-)
-
+bleu_score = bleu_eval(response=response, ground_truth=ground_truth)
 rich.print(bleu_score)
 
-
-meteor_eval = MeteorScoreEvaluator(
-    alpha=0.9,
-    beta=3.0,
-    gamma=0.5
-)
-
+meteor_eval = MeteorScoreEvaluator(alpha=0.9, beta=3.0, gamma=0.5)
 meteor_score = meteor_eval(
     response=response,
     ground_truth=ground_truth,

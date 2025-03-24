@@ -12,7 +12,8 @@ from azure.ai.evaluation import (
 
 import azure.identity
 from dotenv import load_dotenv
-import rich 
+import rich
+
 # Setup the OpenAI client to use either Azure or GitHub Models
 load_dotenv(override=True)
 API_HOST = os.getenv("API_HOST", "github")
