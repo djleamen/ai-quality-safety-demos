@@ -48,7 +48,7 @@ groundedness_score = groundedness_eval(
 rich.print("Groundedness", groundedness_score)
 
 relevance_eval = RelevanceEvaluator(model_config)
-relevance_score = relevance_eval(response=response, context=context, query=query)
+relevance_score = relevance_eval(response=response, query=query)
 rich.print("Relevance", relevance_score)
 
 coherence_eval = CoherenceEvaluator(model_config)

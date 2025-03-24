@@ -6,31 +6,13 @@ targetScope = 'subscription'
 param environmentName string
 
 @minLength(1)
-@description('Location for the OpenAI resource')
-// https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#models-by-deployment-type
+@description('Location for the OpenAI and Azure AI Project resources')
+// https://learn.microsoft.com/azure/ai-foundry/how-to/develop/evaluate-sdk#region-support
 @allowed([
-  'australiaeast'
-  'brazilsouth'
-  'canadaeast'
-  'eastus'
   'eastus2'
   'francecentral'
-  'germanywestcentral'
-  'japaneast'
-  'koreacentral'
-  'northcentralus'
-  'norwayeast'
-  'polandcentral'
-  'southafricanorth'
-  'southcentralus'
-  'southindia'
-  'spaincentral'
   'swedencentral'
-  'switzerlandnorth'
-  'uksouth'
-  'westeurope'
-  'westus'
-  'westus3'
+  'switzerlandwest'
 ])
 @metadata({
   azd: {
@@ -40,15 +22,15 @@ param environmentName string
 param location string
 
 @description('Name of the GPT model to deploy')
-param gptModelName string = 'gpt-4o-mini'
+param gptModelName string = 'gpt-4o'
 
 @description('Version of the GPT model to deploy')
 // See version availability in this table:
 // https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#models-by-deployment-type
-param gptModelVersion string = '2024-07-18'
+param gptModelVersion string = '2024-11-20'
 
 @description('Name of the model deployment (can be different from the model name)')
-param gptDeploymentName string = 'gpt-4o-mini'
+param gptDeploymentName string = 'gpt-4o'
 
 @description('Capacity of the GPT deployment')
 // You can increase this, but capacity is limited per model/region, so you will get errors if you go over
@@ -64,7 +46,7 @@ param runningOnGitHub string = ''
 var principalType = empty(runningOnGitHub) ? 'User' : 'ServicePrincipal'
 
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var prefix = '${environmentName}${resourceToken}'
+var prefix = take(replace(toLower('${environmentName}${resourceToken}'), '-', ''), 15)
 var tags = { 'azd-env-name': environmentName }
 
 // Organize resources in a resource group
@@ -113,6 +95,38 @@ module openAi 'br/public:avm/res/cognitive-services/account:0.7.1' = {
   }
 }
 
+
+module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
+  name: 'storage'
+  scope: resourceGroup
+  params: {
+    name: '${prefix}storage'
+    location: location
+    tags: tags
+    kind: 'StorageV2'
+    skuName: 'Standard_LRS'
+    networkAcls: {
+      defaultAction: 'Allow'
+      bypass: 'AzureServices'
+    }
+    allowBlobPublicAccess: false
+    allowSharedKeyAccess: false
+  }
+}
+
+module ai 'core/ai/ai-environment.bicep' = {
+  name: 'ai'
+  scope: resourceGroup
+  params: {
+    location: location
+    tags: tags
+    hubName: 'aihub-${resourceToken}'
+    projectName: 'aiproj-${resourceToken}'
+    storageAccountId: storage.outputs.resourceId
+    applicationInsightsId: ''
+  }
+}
+
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_RESOURCE_GROUP string = resourceGroup.name
@@ -120,5 +134,6 @@ output AZURE_RESOURCE_GROUP string = resourceGroup.name
 // Specific to Azure OpenAI
 output AZURE_AI_SERVICE string = openAi.outputs.name
 output AZURE_AI_ENDPOINT string = openAi.outputs.endpoint
-output AZURE_AI_MODEL string = gptModelName
+output AZURE_AI_CHAT_MODEL string = gptModelName
 output AZURE_AI_CHAT_DEPLOYMENT string = gptDeploymentName
+output AZURE_AI_PROJECT string = ai.outputs.projectName

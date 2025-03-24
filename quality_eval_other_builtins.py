@@ -45,10 +45,7 @@ f1_score = f1_eval(response=response, ground_truth=ground_truth)
 rich.print(f1_score)
 
 rouge_eval = RougeScoreEvaluator(rouge_type=RougeType.ROUGE_1)
-rouge_score = rouge_eval(
-    response=response,
-    ground_truth=ground_truth,
-)
+rouge_score = rouge_eval(response=response, ground_truth=ground_truth)
 rich.print(rouge_score)
 
 bleu_eval = BleuScoreEvaluator()
@@ -56,19 +53,10 @@ bleu_score = bleu_eval(response=response, ground_truth=ground_truth)
 rich.print(bleu_score)
 
 meteor_eval = MeteorScoreEvaluator(alpha=0.9, beta=3.0, gamma=0.5)
-meteor_score = meteor_eval(
-    response=response,
-    ground_truth=ground_truth,
-)
-
+meteor_score = meteor_eval(response=response, ground_truth=ground_truth)
 rich.print(meteor_score)
 
 
 gleu_eval = GleuScoreEvaluator()
-
-gleu_score = gleu_eval(
-    response=response,
-    ground_truth=ground_truth,
-)
-
+gleu_score = gleu_eval(response=response, ground_truth=ground_truth)
 rich.print(gleu_score)
