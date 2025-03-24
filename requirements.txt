@@ -3,3 +3,4 @@ azure-ai-evaluation
 azure-identity
 openai
 python-dotenv
+rich

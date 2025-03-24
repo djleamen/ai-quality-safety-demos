@@ -10,13 +10,19 @@ load_dotenv()
 logging.basicConfig(level=logging.WARNING)
 
 
-if not os.getenv("AZURE_OPENAI_SERVICE") or not os.getenv("AZURE_OPENAI_GPT_DEPLOYMENT"):
-    logging.warning("AZURE_OPENAI_SERVICE and AZURE_OPENAI_GPT_DEPLOYMENT environment variables are empty. See README.")
+if not os.getenv("AZURE_OPENAI_SERVICE") or not os.getenv(
+    "AZURE_OPENAI_GPT_DEPLOYMENT"
+):
+    logging.warning(
+        "AZURE_OPENAI_SERVICE and AZURE_OPENAI_GPT_DEPLOYMENT environment variables are empty. See README."
+    )
     exit(1)
 
 
 credential = azure.identity.DefaultAzureCredential()
-token_provider = azure.identity.get_bearer_token_provider(credential, "https://cognitiveservices.azure.com/.default")
+token_provider = azure.identity.get_bearer_token_provider(
+    credential, "https://cognitiveservices.azure.com/.default"
+)
 
 client = openai.AzureOpenAI(
     api_version="2024-03-01-preview",
@@ -30,7 +36,10 @@ response = client.chat.completions.create(
     temperature=0.7,
     n=1,
     messages=[
-        {"role": "system", "content": "You are a helpful assistant that makes lots of cat references and uses emojis."},
+        {
+            "role": "system",
+            "content": "You are a helpful assistant that makes lots of cat references and uses emojis.",
+        },
         {"role": "user", "content": "Write a haiku about a hungry cat who wants tuna"},
     ],
 )
