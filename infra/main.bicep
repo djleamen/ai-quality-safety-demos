@@ -118,6 +118,7 @@ output AZURE_TENANT_ID string = tenant().tenantId
 output AZURE_RESOURCE_GROUP string = resourceGroup.name
 
 // Specific to Azure OpenAI
-output AZURE_OPENAI_SERVICE string = openAi.outputs.name
-output AZURE_OPENAI_GPT_MODEL string = gptModelName
-output AZURE_OPENAI_GPT_DEPLOYMENT string = gptDeploymentName
+output AZURE_AI_SERVICE string = openAi.outputs.name
+output AZURE_AI_ENDPOINT string = openAi.outputs.endpoint
+output AZURE_AI_MODEL string = gptModelName
+output AZURE_AI_CHAT_DEPLOYMENT string = gptDeploymentName

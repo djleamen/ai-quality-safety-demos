@@ -2,8 +2,9 @@
 Set-Content -Path .env -Value ""
 
 # Append new values to the .env file
-$azureOpenAiDeployment = azd env get-value AZURE_OPENAI_GPT_DEPLOYMENT
-$azureOpenAiService = azd env get-value AZURE_OPENAI_SERVICE
+$azureAiChatDeployment = azd env get-value AZURE_AI_CHAT_DEPLOYMENT
+$azureAiEndpoint = azd env get-value AZURE_AI_ENDPOINT
 
-Add-Content -Path .env -Value "AZURE_OPENAI_GPT_DEPLOYMENT=$azureOpenAiDeployment"
-Add-Content -Path .env -Value "AZURE_OPENAI_SERVICE=$azureOpenAiService"
+Add-Conent -Path .env -Value "API_HOST=azure"
+Add-Content -Path .env -Value "AZURE_AI_CHAT_DEPLOYMENT=$azureAiChatDeployment"
+Add-Content -Path .env -Value "AZURE_AI_ENDPOINT=$azureAiEndpoint"

@@ -1,5 +1,17 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: azure-openai-keyless-python
+name: ai-safety-quality-demos
 metadata:
-  template: azure-openai-keyless-python@0.0.4
+  template: ai-safety-quality-demos@0.0.1
+hooks:
+    postprovision:
+      windows:
+        shell: pwsh
+        run: ./write_dot_env.ps1;
+        interactive: true
+        continueOnError: false
+      posix:
+        shell: sh
+        run: ./write_dot_env.sh;
+        interactive: true
+        continueOnError: false

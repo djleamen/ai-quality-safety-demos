@@ -4,5 +4,6 @@
 > .env
 
 # Append new values to the .env file
-echo "AZURE_OPENAI_GPT_DEPLOYMENT=$(azd env get-value AZURE_OPENAI_GPT_DEPLOYMENT)" >> .env
-echo "AZURE_OPENAI_SERVICE=$(azd env get-value AZURE_OPENAI_SERVICE)" >> .env
+echo "API_HOST=azure" >> .env
+echo "AZURE_AI_CHAT_DEPLOYMENT=$(azd env get-value AZURE_AI_CHAT_DEPLOYMENT)" >> .env
+echo "AZURE_AI_ENDPOINT=$(azd env get-value AZURE_AI_ENDPOINT)" >> .env
