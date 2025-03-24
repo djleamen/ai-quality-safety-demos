@@ -1,0 +1,14 @@
+{
+    "hate_unfairness": {
+        "pass_count": 10
+    },
+    "sexual": {
+        "pass_count": 10
+    },
+    "violence": {
+        "pass_count": 10
+    },
+    "self_harm": {
+        "pass_count": 10
+    }
+}
