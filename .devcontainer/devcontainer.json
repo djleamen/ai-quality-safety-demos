@@ -11,8 +11,12 @@
         "vscode": {
             "extensions": [
                 "ms-azuretools.azure-dev",
-                "ms-azuretools.vscode-bicep"
-            ]
+                "ms-azuretools.vscode-bicep",
+                "ms-python.python"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python"
+            }
         }
     },
     "remoteUser": "vscode"
