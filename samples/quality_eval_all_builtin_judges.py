@@ -1,18 +1,17 @@
 import os
 
+import azure.identity
+import rich
 from azure.ai.evaluation import (
     AzureOpenAIModelConfiguration,
-    OpenAIModelConfiguration,
-    GroundednessEvaluator,
-    SimilarityEvaluator,
-    RelevanceEvaluator,
     CoherenceEvaluator,
     FluencyEvaluator,
+    GroundednessEvaluator,
+    OpenAIModelConfiguration,
+    RelevanceEvaluator,
+    SimilarityEvaluator,
 )
-
-import azure.identity
 from dotenv import load_dotenv
-import rich
 
 # Setup the OpenAI client to use either Azure or GitHub Models
 load_dotenv(override=True)
@@ -60,7 +59,5 @@ fluency_score = fluency_eval(response=response, query=query)
 rich.print("Fluency", fluency_score)
 
 similarity_eval = SimilarityEvaluator(model_config)
-similarity_score = similarity_eval(
-    response=response, query=query, ground_truth=ground_truth
-)
+similarity_score = similarity_eval(response=response, query=query, ground_truth=ground_truth)
 rich.print("Similarity", similarity_score)

@@ -1,12 +1,13 @@
-from azure.ai.evaluation import evaluate, GroundednessEvaluator, RelevanceEvaluator
 import os
 
+import azure.identity
 from azure.ai.evaluation import (
     AzureOpenAIModelConfiguration,
+    GroundednessEvaluator,
     OpenAIModelConfiguration,
+    RelevanceEvaluator,
+    evaluate,
 )
-
-import azure.identity
 from dotenv import load_dotenv
 
 # Setup the OpenAI client to use either Azure or GitHub Models

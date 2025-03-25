@@ -1,18 +1,18 @@
 import os
 
+import azure.identity
+import rich
 from azure.ai.evaluation import (
     AzureOpenAIModelConfiguration,
+    BleuScoreEvaluator,
+    F1ScoreEvaluator,
+    GleuScoreEvaluator,
+    MeteorScoreEvaluator,
     OpenAIModelConfiguration,
     RougeScoreEvaluator,
     RougeType,
-    F1ScoreEvaluator,
-    MeteorScoreEvaluator,
-    BleuScoreEvaluator,
-    GleuScoreEvaluator,
 )
-import azure.identity
 from dotenv import load_dotenv
-import rich
 
 # Setup the OpenAI client to use either Azure or GitHub Models
 load_dotenv(override=True)
