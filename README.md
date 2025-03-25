@@ -4,6 +4,8 @@ This repository contains a collection of Python scripts that demonstrate how to 
 
 ## Available scripts
 
+Check the `samples` directory for the available scripts.
+
 * [safety_filter_violence.py](samples/safety_filter_violence.py): Makes a chat completion call with OpenAI package with a violent message and handles the content safety error in the response.
 * [safety_filter_jailbreak.py](samples/safety_filter_jailbreak.py): Makes a chat completion call with OpenAI package with a jailbreak attempt and handles the content safety error in the response.
 * [quality_eval_groundedness.py](samples/quality_eval_groundedness.py): Evaluates the groundedness of a sample answer and sources using the Azure AI Evaluation SDK.
@@ -12,6 +14,26 @@ This repository contains a collection of Python scripts that demonstrate how to 
 * [quality_eval_other_builtins.py](samples/quality_eval_other_builtins.py): Evaluates the quality of a sample query and answer using non-GPT-based evaluators in the Azure AI Evaluation SDK (NLP metrics like F1, BLEU, ROUGE, etc.).
 * [quality_eval_bulk.py](samples/quality_eval_bulk.py): Evaluates the quality of multiple query/answer pairs using the Azure AI Evaluation SDK.
 * [safety_eval.py](samples/safety_eval.py): Evaluates the safety of a sample query and answer using the Azure AI Evaluation SDK. This script requires an Azure AI Project.
+
+## Configuring GitHub Models
+
+If you open this repository in GitHub Codespaces, you can run the scripts for free using GitHub Models without any additional steps, as your `GITHUB_TOKEN` is already configured in the Codespaces environment.
+
+If you want to run the scripts locally, you need to set up the `GITHUB_TOKEN` environment variable with a GitHub personal access token (PAT). You can create a PAT by following these steps:
+
+1. Go to your GitHub account settings.
+2. Click on "Developer settings" in the left sidebar.
+3. Click on "Personal access tokens" in the left sidebar.
+4. Click on "Tokens (classic)" or "Fine-grained tokens" depending on your preference. 
+5. Click on "Generate new token".
+6. Give your token a name and select the scopes you want to grant. For this project, you don't need any specific scopes.
+7. Click on "Generate token".
+8. Copy the generated token.
+9. Set the `GITHUB_TOKEN` environment variable in your terminal or IDE:
+
+    ```shell
+    export GITHUB_TOKEN=your_personal_access_token
+    ```
 
 ## Provisioning Azure AI resources
 
