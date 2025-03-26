@@ -24,7 +24,7 @@ If you want to run the scripts locally, you need to set up the `GITHUB_TOKEN` en
 1. Go to your GitHub account settings.
 2. Click on "Developer settings" in the left sidebar.
 3. Click on "Personal access tokens" in the left sidebar.
-4. Click on "Tokens (classic)" or "Fine-grained tokens" depending on your preference. 
+4. Click on "Tokens (classic)" or "Fine-grained tokens" depending on your preference.
 5. Click on "Generate new token".
 6. Give your token a name and select the scopes you want to grant. For this project, you don't need any specific scopes.
 7. Click on "Generate token".
@@ -37,7 +37,7 @@ If you want to run the scripts locally, you need to set up the `GITHUB_TOKEN` en
 
 ## Provisioning Azure AI resources
 
-This project includes infrastructure as code (IaC) to provision the Azure AI resources needed to run the quality and safety evaluation scripts. The IaC is defined in the `infra` directory and uses the Azure Developer CLI to provision the resources. 
+This project includes infrastructure as code (IaC) to provision the Azure AI resources needed to run the quality and safety evaluation scripts. The IaC is defined in the `infra` directory and uses the Azure Developer CLI to provision the resources.
 
 1. Make sure the [Azure Developer CLI (azd)](https://aka.ms/install-azd) is installed.
 
