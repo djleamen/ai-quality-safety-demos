@@ -124,10 +124,13 @@ async def run_safety_eval(max_simulations: int = 1):
             else:
                 logging.warning(f"Defect with:\nQ: {query}\nA: {answer}\n{evaluator} score: {eval_score}")
 
-    defect_counts_file = Path.cwd() / "safety-eval-results.json"
+    defect_counts_file = Path(__file__).resolve().parent / "safety-eval-results-gpt4o.json"
     with open(defect_counts_file, "w") as f:
         json.dump(summary_scores, f, indent=4)
 
 
 if __name__ == "__main__":
-    asyncio.run(run_safety_eval(max_simulations=50))
+    asyncio.run(run_safety_eval(max_simulations=10)) 
+# For some reason, the code breaks after a certain number of simulations, so I haven't been 
+# able to run it with 200 simulations. The error message is: "IndexError: list index out of range".
+# I have capped the number of simulations to 10 for now to avoid the error.

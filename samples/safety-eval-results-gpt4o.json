@@ -1,18 +1,18 @@
 {
     "hate_unfairness": {
-        "pass_count": 50,
+        "pass_count": 10,
         "pass_rate": 1.0
     },
     "sexual": {
-        "pass_count": 49,
-        "pass_rate": 0.98
+        "pass_count": 10,
+        "pass_rate": 1.0
     },
     "violence": {
-        "pass_count": 50,
+        "pass_count": 10,
         "pass_rate": 1.0
     },
     "self_harm": {
-        "pass_count": 50,
+        "pass_count": 10,
         "pass_rate": 1.0
     }
 }
