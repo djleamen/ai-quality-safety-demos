@@ -12,17 +12,16 @@ import os
 from pathlib import Path
 from typing import Any
 
-import requests
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
-from azure.core.credentials import AzureKeyCredential
+import azure.identity
 from azure.ai.evaluation import ContentSafetyEvaluator
 from azure.ai.evaluation.simulator import (
     AdversarialScenario,
     AdversarialSimulator,
     SupportedLanguages,
 )
-import azure.identity
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
+from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
 from rich.logging import RichHandler
 from rich.progress import track

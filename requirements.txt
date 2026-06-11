@@ -1,6 +1,8 @@
 
 azure-ai-evaluation
+azure-ai-inference
 azure-identity
 openai
+promptflow
 python-dotenv
 rich
