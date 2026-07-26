@@ -61,6 +61,7 @@ async def callback(
         endpoint,
         headers=headers,
         json=data,
+        timeout=(10, 60),
     )
     messages = []
     if response.status_code == 200:
